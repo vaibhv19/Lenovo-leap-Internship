@@ -1,0 +1,74 @@
+:root {
+  --background: #0f172a;
+  --card: #1e293b;
+  --text: #e2e8f0;
+  --accent: #38bdf8;
+  --shadow: rgba(15, 23, 42, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 25%),
+    linear-gradient(180deg, #020617 0%, #0f172a 100%);
+  color: var(--text);
+  padding: 1.5rem;
+}
+
+.clock-container {
+  width: min(460px, 100%);
+}
+
+.clock-card {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 1.5rem;
+  box-shadow: 0 32px 80px var(--shadow);
+  padding: 2rem;
+  text-align: center;
+}
+
+.clock-card h1 {
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.06em;
+}
+
+.clock-display {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  border-radius: 1.25rem;
+  background: rgba(15, 23, 42, 0.74);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  font-family: "Fira Code", Consolas, Monaco, monospace;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.clock-note {
+  margin-top: 1rem;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 380px) {
+  .clock-card {
+    padding: 1.5rem;
+  }
+}
