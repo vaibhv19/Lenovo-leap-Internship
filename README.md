@@ -11,7 +11,6 @@ This profile represents the official details from the internship offer letter an
 | Parameter | Details |
 | :--- | :--- |
 | **Intern Name** | Vaibhav Gupta |
-| **AICTE Internship ID** | *[Insert AICTE ID here]* |
 | **Internship Track** | AI-Driven Web Application & Product Development |
 | **Duration** | 6 Weeks (15.06.2026 to 30.07.2026) |
 | **Implementing Partner** | BharatCares (Implemented by SMEC Trust) |
