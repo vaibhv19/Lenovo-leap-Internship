@@ -105,11 +105,3 @@ Ensure you have [Node.js](https://nodejs.org/) installed (version 18+ is recomme
    ```
 
 ---
-
-## 📜 Undertaking Agreement & Compliance
-
-All submissions and project developments in this repository adhere to the **Undertaking Agreement** terms signed with **BharatCares**:
-1. **Attendance & Engagement:** Participation in weekly virtual masterclasses and active communication.
-2. **Academic Integrity:** Complete and honest development of assigned projects.
-3. **Data Confidentiality:** Maintaining strict confidentiality of all company data and internship platform information.
-4. **Professional Conduct:** Adhering to the code of conduct prescribed under the Lenovo LEAP program.
