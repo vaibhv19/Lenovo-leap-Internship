@@ -84,11 +84,3 @@ npm run lint
 
 - Added `MILESTONE 7- Assignment` implementing `StudentCard`, `StudentForm`, and `StudentList` components for a small CRUD-style UI.
 - Standardized run instructions and added explicit PowerShell examples for Windows users.
-
----
-
-## Notes & Next Steps
-
-- If you want, I can: update each project's README with component docs, add npm scripts for tests, or create a single root script to bootstrap any demo.
-
----
