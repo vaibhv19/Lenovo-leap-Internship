@@ -1,16 +1,27 @@
-# React + Vite
+## MILESTONE 7 — Student Management UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This project demonstrates a small, component-driven student management UI implemented with React and Vite. Key components live in `src/components` and include:
 
-Currently, two official plugins are available:
+- `StudentCard` — Presentational card that displays a student's name, ID, and status. Accepts props: `student: { id, name, age, course, status }`, `onEdit(studentId)`, and `onDelete(studentId)`.
+- `StudentForm` — Controlled form for creating or editing a student. Props: `initialValues` (optional), `onSubmit(values)`, `onCancel()`.
+- `StudentList` — Renders a list of `StudentCard` components. Props: `students[]`, `onEdit(id)`, `onDelete(id)`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Usage examples (conceptual):
 
-## React Compiler
+1. Show a list of students:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```jsx
+<StudentList students={students} onEdit={handleEdit} onDelete={handleDelete} />
+```
 
-## Expanding the Oxlint configuration
+2. Create or edit a student:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```jsx
+<StudentForm initialValues={editingStudent} onSubmit={saveStudent} onCancel={() => setEditing(null)} />
+```
+
+Development notes:
+
+- Run the dev server with `npm run dev`.
+- Lint with `npm run lint`.
+- A placeholder `test` script is provided in `package.json` until unit tests are added.
