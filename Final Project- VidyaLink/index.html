@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaLink | Peer Learning & Resource Vault</title>
+    <!-- Inter Font for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <h1 class="logo-title">VidyaLink</h1>
+                <p class="logo-subtitle">Peer Learning & Resource Vault (SDG 4)</p>
+            </div>
+            <nav class="app-nav">
+                <button class="nav-btn active" id="tab-vault" data-tab="vault">Resource Vault</button>
+                <button class="nav-btn" id="tab-doubts" data-tab="doubts">Doubt Board</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="app-content container">
+        <!-- Resource Vault Section -->
+        <section id="view-vault" class="view-section active">
+            <div class="section-header">
+                <h2>Verified Study Resources</h2>
+                <p>Browse and filter peer-curated study guides, code repositories, and exam prep sheets.</p>
+            </div>
+            
+            <div class="vault-controls">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search resources by title, description or tags...">
+                </div>
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="filter-subject">Subject</label>
+                        <select id="filter-subject">
+                            <option value="">All Subjects</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-tech">Tech Stack</label>
+                        <select id="filter-tech">
+                            <option value="">All Stacks</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-topic">Exam / Topic</label>
+                        <select id="filter-topic">
+                            <option value="">All Topics</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-by">Sort By</label>
+                        <select id="sort-by">
+                            <option value="newest">Newest First</option>
+                            <option value="top">Top Upvoted</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resources-grid" id="resources-list">
+                <!-- Loaded dynamically via app.js -->
+            </div>
+        </section>
+
+        <!-- Doubt Board Section -->
+        <section id="view-doubts" class="view-section">
+            <div class="section-header-row">
+                <div class="section-header">
+                    <h2>Doubt Clearance Board</h2>
+                    <p>Post your questions anonymously and get answers from your peers.</p>
+                </div>
+                <button class="btn btn-primary" id="btn-open-ask-modal">Ask a Doubt</button>
+            </div>
+
+            <div class="doubts-container">
+                <div class="doubts-list-wrapper" id="doubts-list-view">
+                    <div class="doubts-list" id="doubts-list">
+                        <!-- Loaded dynamically via app.js -->
+                    </div>
+                </div>
+                
+                <!-- Doubt Details Wrapper -->
+                <div class="doubt-details-wrapper hidden" id="doubt-detail-view">
+                    <button class="btn-link" id="btn-back-to-list">&larr; Back to all doubts</button>
+                    <div id="doubt-detail-content">
+                        <!-- Loaded dynamically via app.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Ask Question -->
+    <div class="modal-overlay hidden" id="ask-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Ask a Doubt</h3>
+                <button class="btn-close" id="btn-close-ask-modal">&times;</button>
+            </div>
+            <form id="ask-doubt-form" class="modal-body">
+                <div class="form-group">
+                    <label for="doubt-title">Doubt Title *</label>
+                    <input type="text" id="doubt-title" required placeholder="e.g. How to balance a red-black tree rotation?">
+                </div>
+                <div class="form-group">
+                    <label for="doubt-author">Your Name *</label>
+                    <input type="text" id="doubt-author" required placeholder="e.g. Rahul Sharma">
+                </div>
+                <div class="form-group">
+                    <label for="doubt-body">Describe your problem *</label>
+                    <textarea id="doubt-body" rows="6" required placeholder="Explain what you are trying to do, what's not working, and any code or equations..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btn-cancel-ask">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit Doubt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 VidyaLink. Built for SDG 4 (Quality Education) Capstone.</p>
+            <p>No account required. All data stored locally in your browser.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
