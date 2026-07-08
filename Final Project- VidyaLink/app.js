@@ -404,6 +404,21 @@ function isAlreadyUpvoted(id) {
 
 function handleUpvoteClick(event, id) {
     event.stopPropagation();
-    // Will be fully implemented in Task 3
+    
+    let upvotedList = JSON.parse(sessionStorage.getItem('vidyalink_upvoted') || '[]');
+    if (upvotedList.includes(id)) {
+        return; // Block double-upvoting in this session
+    }
+
+    const res = resources.find(r => r.id === id);
+    if (!res) return;
+
+    res.upvotes += 1;
+    localStorage.setItem('vidyalink_resources', JSON.stringify(resources));
+
+    upvotedList.push(id);
+    sessionStorage.setItem('vidyalink_upvoted', JSON.stringify(upvotedList));
+
+    renderResources();
 }
 
