@@ -64,8 +64,6 @@ This project is built intentionally as a **client-side prototype** to showcase f
 - [index.html](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/index.html) – Application structure and UI components.
 - [style.css](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/style.css) – Premium Minimalist styling and responsive design.
 - [app.js](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/app.js) – Core client-side state, seed data, filters, upvotes, and doubt board logic.
-- [SUBMISSION.md](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/SUBMISSION.md) – Formatted capstone submission document.
-- [SUBMISSION.docx](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/SUBMISSION.docx) – MS Word exported document of the submission.
 - [screenshots/](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/screenshots) – Folder containing verification images.
 
 ---
