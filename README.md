@@ -20,7 +20,7 @@ Last updated: 2026-07-08
 
 This workspace contains the final capstone project and multiple independent frontend assignments completed during the internship.
 
-- **Final Project - VidyaLink** — Capstone project for the AI-Driven Web Application & Product Development track. A community-driven peer learning platform and study resource vault for **SDG 4 (Quality Education)**. Features live search, subject/tech filters, consensus upvoting, and a doubt clearance board. Folder: [Final Project- VidyaLink](Final%20Project-%20VidyaLink)
+- **Final Project - VidyaLink** — Capstone project for the AI-Driven Web Application & Product Development track. A community-driven peer learning platform and study resource vault for **SDG 4 (Quality Education)**. Features live search, subject/tech filters, consensus upvoting, and a doubt clearance board. Folder: [Final Project- VidyaLink](Final%20Project-%20VidyaLink) | Project Proposal: [SDG_VidyaLink_VaibhavGupta.pdf](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/SDG_VidyaLink_VaibhavGupta.pdf)
 - **Assignment 1** — Basic landing page prototype demonstrating component-driven UI and client routing. Folder: [Assignment 1](Assignment%201)
 - **Assignment 1 - Draft 2** — Refined/polished version with premium UI styling (glassmorphism). Folder: [Assignment 1-draft 2](Assignment%201-draft%202)
 - **MILESTONE 7 - Assignment** — A separate assignment that implements a simple student management UI (components: `StudentCard`, `StudentForm`, `StudentList`). Folder: [MILESTONE 7- Assignment](MILESTONE%207-%20Assignment)

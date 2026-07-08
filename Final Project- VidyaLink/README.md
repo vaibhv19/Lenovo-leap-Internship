@@ -64,6 +64,7 @@ This project is built intentionally as a **client-side prototype** to showcase f
 - [index.html](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/index.html) – Application structure and UI components.
 - [style.css](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/style.css) – Premium Minimalist styling and responsive design.
 - [app.js](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/app.js) – Core client-side state, seed data, filters, upvotes, and doubt board logic.
+- [SDG_VidyaLink_VaibhavGupta.pdf](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/SDG_VidyaLink_VaibhavGupta.pdf) – Detailed SDG 4 project proposal and documentation.
 - [screenshots/](file:///d:/vaibhav%20gupta/Coding/Projects----Internship/Lenovo%20leap%20internship/Final%20Project-%20VidyaLink/screenshots) – Folder containing verification images.
 
 ---
