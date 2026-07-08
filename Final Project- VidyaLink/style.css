@@ -31,6 +31,15 @@
     padding: 0;
 }
 
+/* Focus outline styling for premium keyboard accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2.5px solid var(--accent-color);
+    outline-offset: 2.5px;
+}
+
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
