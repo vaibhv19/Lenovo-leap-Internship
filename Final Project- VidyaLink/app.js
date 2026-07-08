@@ -182,23 +182,86 @@ const SEEDED_RESOURCES = [
     }
 ];
 
+// Seed data for 3 doubts
+const SEEDED_DOUBTS = [
+    {
+        id: "doubt-1",
+        title: "How does the time complexity of QuickSort degrade to O(n^2)?",
+        author: "Amit Patel",
+        body: "I understand that on average QuickSort is O(n log n). But I'm confused about the worst-case pivot selection. How does choosing the first/last element as pivot cause O(n^2) time complexity, and how does randomized pivot selection fix this?",
+        datePosted: "2026-07-05",
+        answers: [
+            {
+                id: "ans-1-1",
+                author: "Priya Sharma",
+                body: "If you always choose the first element as the pivot, and the input array is already sorted (or reverse sorted), the pivot will always be the smallest (or largest) element. This results in highly unbalanced partitions, where one partition has 0 elements and the other has n-1 elements. The recursion depth becomes n instead of log n, leading to a summation of O(n) work done at each of the n levels, which is O(n^2). Randomizing the pivot selection makes it highly unlikely that we consistently choose the extreme element, ensuring close to balanced partitions on average.",
+                datePosted: "2026-07-05",
+                accepted: true
+            },
+            {
+                id: "ans-1-2",
+                author: "Vijay K.",
+                body: "Yes, Priya explained it perfectly. Another way to fix this without randomization is the Median-of-Three pivot selection method where you choose the median of the first, middle, and last elements.",
+                datePosted: "2026-07-06",
+                accepted: false
+            }
+        ]
+    },
+    {
+        id: "doubt-2",
+        title: "Confused about Quantum Tunneling physical intuition",
+        author: "Sneha Reddy",
+        body: "In quantum mechanics, they say a particle can pass through a potential barrier higher than its kinetic energy. How is this possible physically? Is the particle actually 'inside' the barrier, or does it vanish and reappear on the other side?",
+        datePosted: "2026-07-06",
+        answers: []
+    },
+    {
+        id: "doubt-3",
+        title: "How to fix 'React Hook useEffect has a missing dependency' warning?",
+        author: "Arjun Das",
+        body: "I have a useEffect that fetches data when a page loads, but ESLint keeps throwing a warning that I'm missing dependencies. If I add the function to the dependency list, it causes an infinite loop of API calls. What is the clean way to handle this?",
+        datePosted: "2026-07-07",
+        answers: [
+            {
+                id: "ans-3-1",
+                author: "Karan Johar",
+                body: "You can move the function definition inside the useEffect hook. That way, the function is not recreated on every render and doesn't need to be in the dependency list. If you need to use the function elsewhere, wrap its definition in a useCallback hook and then add it to the useEffect dependency array.",
+                datePosted: "2026-07-07",
+                accepted: true
+            }
+        ]
+    }
+];
+
 // App State
 let resources = [];
+let doubts = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     initData();
     initNavigation();
     initVault();
+    initDoubts();
 });
 
 // Load / Seed Data
 function initData() {
-    const stored = localStorage.getItem('vidyalink_resources');
-    if (!stored) {
+    // Resources
+    const storedRes = localStorage.getItem('vidyalink_resources');
+    if (!storedRes) {
         localStorage.setItem('vidyalink_resources', JSON.stringify(SEEDED_RESOURCES));
         resources = [...SEEDED_RESOURCES];
     } else {
-        resources = JSON.parse(stored);
+        resources = JSON.parse(storedRes);
+    }
+
+    // Doubts
+    const storedDoubts = localStorage.getItem('vidyalink_doubts');
+    if (!storedDoubts) {
+        localStorage.setItem('vidyalink_doubts', JSON.stringify(SEEDED_DOUBTS));
+        doubts = [...SEEDED_DOUBTS];
+    } else {
+        doubts = JSON.parse(storedDoubts);
     }
 }
 
@@ -219,6 +282,11 @@ function initNavigation() {
             sections.forEach(sec => {
                 if (sec.id === `view-${targetTab}`) {
                     sec.classList.add('active');
+                    if (targetTab === 'doubts') {
+                        showDoubtsList();
+                    } else if (targetTab === 'vault') {
+                        renderResources();
+                    }
                 } else {
                     sec.classList.remove('active');
                 }
@@ -420,5 +488,239 @@ function handleUpvoteClick(event, id) {
     sessionStorage.setItem('vidyalink_upvoted', JSON.stringify(upvotedList));
 
     renderResources();
+}
+
+// Doubt Clearance Board Features
+function initDoubts() {
+    const btnOpenModal = document.getElementById('btn-open-ask-modal');
+    const btnCloseModal = document.getElementById('btn-close-ask-modal');
+    const btnCancelAsk = document.getElementById('btn-cancel-ask');
+    const askModal = document.getElementById('ask-modal');
+    const askForm = document.getElementById('ask-doubt-form');
+    const btnBackToList = document.getElementById('btn-back-to-list');
+
+    // Modal toggling
+    btnOpenModal.addEventListener('click', () => {
+        askModal.classList.remove('hidden');
+    });
+
+    const closeModal = () => {
+        askModal.classList.add('hidden');
+        askForm.reset();
+    };
+
+    btnCloseModal.addEventListener('click', closeModal);
+    btnCancelAsk.addEventListener('click', closeModal);
+    
+    // Close modal when clicking outside the card
+    askModal.addEventListener('click', (e) => {
+        if (e.target === askModal) {
+            closeModal();
+        }
+    });
+
+    // Form Submission
+    askForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('doubt-title').value.trim();
+        const author = document.getElementById('doubt-author').value.trim();
+        const body = document.getElementById('doubt-body').value.trim();
+
+        if (!title || !author || !body) return;
+
+        const newDoubt = {
+            id: `doubt-${Date.now()}`,
+            title: title,
+            author: author,
+            body: body,
+            datePosted: new Date().toISOString().split('T')[0],
+            answers: []
+        };
+
+        doubts.unshift(newDoubt);
+        localStorage.setItem('vidyalink_doubts', JSON.stringify(doubts));
+        
+        closeModal();
+        showDoubtsList();
+    });
+
+    // Back to List Button
+    btnBackToList.addEventListener('click', showDoubtsList);
+
+    // Initial render of doubts
+    renderDoubts();
+}
+
+function showDoubtsList() {
+    const listWrapper = document.getElementById('doubts-list-view');
+    const detailWrapper = document.getElementById('doubt-detail-view');
+    
+    listWrapper.classList.remove('hidden');
+    detailWrapper.classList.add('hidden');
+    
+    renderDoubts();
+}
+
+function renderDoubts() {
+    const container = document.getElementById('doubts-list');
+    if (!container) return;
+
+    if (doubts.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                No doubts posted yet. Be the first to ask!
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = doubts.map(d => {
+        const answersCount = d.answers.length;
+        const hasAccepted = d.answers.some(a => a.accepted);
+        
+        let answersText = `${answersCount} answer${answersCount !== 1 ? 's' : ''}`;
+        if (hasAccepted) {
+            answersText += ` (1 accepted)`;
+        }
+
+        const dateStr = formatDate(d.datePosted);
+
+        return `
+            <div class="doubt-item" onclick="openDoubtDetails('${d.id}')">
+                <div class="doubt-item-header">
+                    <h3 class="doubt-item-title">${escapeHTML(d.title)}</h3>
+                    <span class="doubt-meta">Asked by <span>${escapeHTML(d.author)}</span></span>
+                </div>
+                <div class="doubt-item-snippet">${escapeHTML(d.body)}</div>
+                <div class="doubt-stats">
+                    <span class="stat-answers ${hasAccepted ? 'has-accepted' : ''}">
+                        ${hasAccepted ? '✓ ' : ''}${answersText}
+                    </span>
+                    <span class="doubt-meta">Posted on ${dateStr}</span>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function openDoubtDetails(id) {
+    const listWrapper = document.getElementById('doubts-list-view');
+    const detailWrapper = document.getElementById('doubt-detail-view');
+    const contentContainer = document.getElementById('doubt-detail-content');
+
+    const doubt = doubts.find(d => d.id === id);
+    if (!doubt) return;
+
+    listWrapper.classList.add('hidden');
+    detailWrapper.classList.remove('hidden');
+
+    // Sort answers: accepted first, then newest first
+    const sortedAnswers = [...doubt.answers].sort((a, b) => {
+        if (a.accepted && !b.accepted) return -1;
+        if (!a.accepted && b.accepted) return 1;
+        return new Date(b.datePosted) - new Date(a.datePosted);
+    });
+
+    const answersHTML = sortedAnswers.map(ans => {
+        return `
+            <div class="answer-card ${ans.accepted ? 'accepted' : ''}">
+                <div class="answer-header">
+                    <span class="answer-meta">Answered by <span>${escapeHTML(ans.author)}</span> on ${formatDate(ans.datePosted)}</span>
+                    ${ans.accepted ? '<span class="badge-accepted">Accepted Answer</span>' : ''}
+                </div>
+                <div class="answer-body">${escapeHTML(ans.body)}</div>
+                <button class="btn-accept-toggle ${ans.accepted ? 'accepted' : ''}" onclick="toggleAcceptAnswer('${doubt.id}', '${ans.id}')">
+                    ${ans.accepted ? 'Accepted ✓' : 'Mark Accepted'}
+                </button>
+            </div>
+        `;
+    }).join('');
+
+    contentContainer.innerHTML = `
+        <div class="doubt-main">
+            <h2 class="doubt-main-title">${escapeHTML(doubt.title)}</h2>
+            <div class="doubt-main-meta">Asked by <span>${escapeHTML(doubt.author)}</span> on ${formatDate(doubt.datePosted)}</div>
+            <div class="doubt-main-body">${escapeHTML(doubt.body)}</div>
+        </div>
+        
+        <div class="answers-section">
+            <h3>Answers (${doubt.answers.length})</h3>
+            <div class="answers-list">
+                ${doubt.answers.length === 0 ? '<p style="color: var(--text-secondary); font-style: italic; padding: 12px 0;">No answers yet. Share your knowledge by posting one below.</p>' : answersHTML}
+            </div>
+            
+            <div class="post-answer-box">
+                <h4>Post an Answer</h4>
+                <form id="post-answer-form" onsubmit="handlePostAnswer(event, '${doubt.id}')">
+                    <div class="form-group">
+                        <label for="answer-author">Your Name *</label>
+                        <input type="text" id="answer-author" required placeholder="e.g. Amit Kumar">
+                    </div>
+                    <div class="form-group">
+                        <label for="answer-body">Your Answer *</label>
+                        <textarea id="answer-body" rows="5" required placeholder="Write your step-by-step explanation or code snippet..."></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Submit Answer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+}
+
+function handlePostAnswer(event, doubtId) {
+    event.preventDefault();
+    const author = document.getElementById('answer-author').value.trim();
+    const body = document.getElementById('answer-body').value.trim();
+
+    if (!author || !body) return;
+
+    const doubt = doubts.find(d => d.id === doubtId);
+    if (!doubt) return;
+
+    const newAnswer = {
+        id: `ans-${Date.now()}`,
+        author: author,
+        body: body,
+        datePosted: new Date().toISOString().split('T')[0],
+        accepted: false
+    };
+
+    doubt.answers.push(newAnswer);
+    localStorage.setItem('vidyalink_doubts', JSON.stringify(doubts));
+
+    openDoubtDetails(doubtId);
+}
+
+function toggleAcceptAnswer(doubtId, answerId) {
+    const doubt = doubts.find(d => d.id === doubtId);
+    if (!doubt) return;
+
+    const answer = doubt.answers.find(a => a.id === answerId);
+    if (!answer) return;
+
+    const currentlyAccepted = answer.accepted;
+
+    // Reset all answers to unaccepted first (since only one can be accepted)
+    doubt.answers.forEach(a => {
+        a.accepted = false;
+    });
+
+    // Toggle the selected answer
+    answer.accepted = !currentlyAccepted;
+
+    localStorage.setItem('vidyalink_doubts', JSON.stringify(doubts));
+    openDoubtDetails(doubtId);
+}
+
+// Simple HTML escaping helper for security
+function escapeHTML(str) {
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
