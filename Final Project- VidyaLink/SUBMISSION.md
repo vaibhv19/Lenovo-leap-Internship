@@ -54,16 +54,16 @@ High school students preparing for competitive exams (e.g., JEE), university stu
 ---
 
 ## 6. Project Screenshots
-*Below are placeholder slots indicating where screenshots of the working web application should be placed during PDF export:*
+Below are screenshots demonstrating the working web application:
 
-*   **[Screenshot 1: Resource Vault Main Page]**  
-    *Placeholder for the main landing page showing the list of 15 seeded resources with their tags and verified badges.*
-*   **[Screenshot 2: Search and Filtering]**  
-    *Placeholder showing the resource list filtered by a specific subject (e.g., "Computer Science") and matching a live search term.*
-*   **[Screenshot 3: Upvote Sorting]**  
-    *Placeholder showing the Resource Vault sorted by "Top Upvoted" where upvoted items re-order dynamically.*
-*   **[Screenshot 4: Doubt Board Q&A and Accepted Answer]**  
-    *Placeholder showing a doubt details view with multiple answers, where one answer has been marked "Accepted," showing the highlighted blue background and top placement.*
+*   **Resource Vault Main Page**:
+    ![Resource Vault Main Page](screenshots/loaded_index_page.png)
+*   **Search and Subject Filtering**:
+    ![Search and Subject Filtering](screenshots/filter_mathematics_result.png)
+*   **Upvote System and Sorting**:
+    ![Upvote Sorting](screenshots/sorted_top_upvoted.png)
+*   **Doubt Board Details View with Highlighted Accepted Answer**:
+    ![Doubt Board Q&A](screenshots/answers_after_toggle.png)
 
 ---
 
